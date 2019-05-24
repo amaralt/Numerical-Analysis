@@ -8,7 +8,7 @@ namespace Lab22Part4
         static void Rk45(Func<double, double, double> f,ref double t, ref double x, ref double h,ref double epil)
         {
             double k1, k2, k3, k4, k5, k6, x4;
-            //This part took me forever and a half because of the stupid c variables.
+            //This is the area where RK45 needs to have these values, so it can calculate it effectively.
             double c20 = 0.25;
             double c21 = 0.25;
 
@@ -45,6 +45,7 @@ namespace Lab22Part4
             double b4 = 28561.0 / 56430.0;
             double b5 = -0.18;
             double b6 = 2.0 / 55.0;
+            //This is where the math comes in.
 
             k1 = h * f(t, x);
             k2 = h * f(t + c20 * h, x + c21 * k1);
@@ -56,11 +57,6 @@ namespace Lab22Part4
             x = x + b1 * k1 + b3 * k3 + b4 * k4 + b5 * k5 + b6 * k6;
             t = t + h;
             epil = Math.Abs(x - x4);
-        }
-
-        static void RK45Adaptive()
-        {
-
         }
 
         static double f(double t, double x)
@@ -90,20 +86,9 @@ namespace Lab22Part4
 
         }
 
-        //static double max(double a, double b)
-        //{
-        //    if (a>=b)
-        //    {
-        //        return a;
-        //    }
-        //    else
-        //    {
-        //        return b;
-        //    }
-        //}
-
         static void Main(string[] args)
         {
+            //given values
             int k;
             double t, h, epil;
             double a = 1;
